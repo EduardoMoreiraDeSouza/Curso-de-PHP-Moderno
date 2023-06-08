@@ -21,7 +21,7 @@
     
         <?php
 
-            if (!isset($_POST['numero'])) {
+            if (!isset($_POST['numero']) or empty($_POST['numero'])) {
 
                 echo "<p>Ops! Não foi enviado nenhum formulário!</p>";
 
