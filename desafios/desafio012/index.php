@@ -44,47 +44,22 @@
         <?php
 
 
-            $semanas = 0;
             $segundosSemanas = 604800;
+            $semanas = intdiv($segundos, $segundosSemanas);
+            $segundos = $segundos % $segundosSemanas;
 
-            while ($segundos >= $segundosSemanas) {
 
-                $semanas += 1;
-                $segundos -= $segundosSemanas;
-
-            }
-
-            $dias = 0;
             $segundosDias = 86400;
+            $dias = intdiv($segundos, $segundosDias);
+            $segundos = $segundos % $segundosDias;
             
-            while ($segundos >= $segundosDias) {
-
-                $dias += 1;
-                $segundos -= $segundosDias;
-
-            }
-
-            $horas = 0;
             $segundosHoras = 3600;
+            $horas = intdiv($segundos, $segundosHoras);
+            $segundos = $segundos % $segundosHoras;
 
-            while ($segundos >= $segundosHoras) {
-
-                $horas += 1;
-                $segundos -= $segundosHoras;
-
-            }
-
-
-            $minutos = 0;
             $segundosMinutos = 60;
-
-            while ($segundos >= $segundosMinutos) {
-
-                $minutos += 1;
-                $segundos -= $segundosMinutos;
-
-            }
-
+            $minutos = intdiv($segundos, $segundosMinutos);
+            $segundos = $segundos % $segundosMinutos;
 
             $segundosUsuario = number_format($segundosUsuario, 0, ',', '.');
 

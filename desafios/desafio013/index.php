@@ -15,21 +15,23 @@
 
     <?php
 
-        $segundosUsuario = $_POST['segundos'] ?? 0;
-        $segundos = $segundosUsuario;
+        $valorSaque = $_POST['valorSaque'] ?? 0;
+        $valorSaqueFormatado = number_format($valorSaque, 2, ',', '.');
 
     ?>
 
     <header>
-        <h1>Calculadora de Tempo:</h1>
+        <h1>Caixa Eletrônico:</h1>
     </header>
 
     <main>
     
         <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
 
-            <label for="segundos">Qual é o total de segundos?</label>
-            <input type="number" name="segundos" id="segundos" value="<?=$segundos?>">
+            <label for="valorSaque">Qual o valor que você deseja sacar? (R$)*</label>
+            <input type="number" name="valorSaque" id="valorSaque" value="<?=$valorSaque?>" step="5">
+
+            <p>Notas disponíveis: R$200, R$100, R$50, R$20, R$10 e R$5</p>
 
             <input type="submit" value="Calcular">
 
@@ -39,18 +41,29 @@
 
     <section>
 
-        <h2>Saque de R$<?=$saque?> realizado</h2>
+        <h2>Saque de R$<?=$valorSaqueFormatado?> realizado</h2>
 
         <?php
+
+            $notas100 = intdiv($valorSaque, 100);
+            $valorSaque -= $notas100 * 100;
+
+            $notas50 = intdiv($valorSaque, 50);
+            $valorSaque -= $notas50 * 50;
+
+            $notas10 = intdiv($valorSaque, 10);
+            $valorSaque -= $notas10 * 10;
+
+            $notas5 = intdiv($valorSaque, 5);
+            $valorSaque -= $notas5 * 5;
 
             print "
                 <p>O caixa eletrônico vai te entregar as seguintes notas:</p>
                 <ul>
-                    <li>R$200,00</li>
-                    <li>R$100,00</li>
-                    <li>R$50,00</li>
-                    <li>R$20,00</li>
-                    <li>R$10,00</li>
+                    <li>R$100,00 x$notas100</li>
+                    <li>R$50,00 x$notas50</li>
+                    <li>R$10,00 x$notas10</li>
+                    <li>R$5,00 x$notas5</li>
                 </ul>
             ";
 
